@@ -55,14 +55,16 @@ const heroPersonagens = [
     alt:   'Suelen',
     nome:  'Suka',
     cargo: 'Fundadora e Diretora Criativa',
-    proximo: 'Édipo'
+    proximo: 'Édipo',
+    objectPosition: 'top center'
   },
   {
     foto:  './arquivos/edipo.png',
     alt:   'Édipo',
     nome:  'Édipo',
-    cargo: 'Co-fundador, Diretor de Tráfego e Piloto de Drone',
-    proximo: 'Suelen'
+    cargo: 'Co-fundador e Diretor de Tráfego',
+    proximo: 'Suelen',
+    objectPosition: '20% 10%'
   }
 ];
 
