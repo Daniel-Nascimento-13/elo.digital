@@ -238,7 +238,7 @@ a { color: inherit; text-decoration: none; }
   gap: 50px;
 }
 .hero-cargo {
-  font-size: 9px;
+  font-size: 6px;
   font-weight: 700;
   letter-spacing: 2.5px;
   text-transform: uppercase;
@@ -246,13 +246,60 @@ a { color: inherit; text-decoration: none; }
 }
 .hero-nome {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(38px, 11vw, 50px);
+  font-size: clamp(28px, 8vw, 40px);
   font-weight: 800;
   line-height: 0.9;
   letter-spacing: -2px;
   color: #fff;
   text-transform: uppercase;
   white-space: nowrap;
+}
+
+/* BOTÃO PRÓXIMA PESSOA */
+.hero-proximo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.5);
+  font-family: 'Syne', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 7px 12px;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-top: 12px;
+  width: fit-content;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+.hero-proximo:active {
+  border-color: var(--green);
+  color: var(--green);
+}
+.hero-proximo-seta {
+  font-size: 11px;
+  transition: transform 0.3s ease;
+}
+.hero-proximo:active .hero-proximo-seta {
+  transform: translateX(3px);
+}
+
+/* TRANSIÇÃO DA FOTO */
+.hero-foto {
+  width: 210px;
+  height: 240px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  filter: grayscale(15%);
+  align-self: flex-end;
+  transition: opacity 0.5s ease;
+}
+.hero-foto.trocando {
+  opacity: 0;
 }
 
 /* FRASE */

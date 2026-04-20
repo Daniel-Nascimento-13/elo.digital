@@ -47,6 +47,65 @@ setTimeout(() => {
 
 
 /* =========================================
+   SEÇÃO 1 — CARROSSEL HERO
+   ========================================= */
+const heroPersonagens = [
+  {
+    foto:  './arquivos/suelen.png',
+    alt:   'Suelen',
+    nome:  'Suka',
+    cargo: 'Fundadora e Diretora Criativa',
+    proximo: 'Édipo'
+  },
+  {
+    foto:  './arquivos/edipo.png',
+    alt:   'Édipo',
+    nome:  'Édipo',
+    cargo: 'Co-fundador, Diretor de Tráfego e Piloto de Drone',
+    proximo: 'Suelen'
+  }
+];
+
+let heroAtual = 0;
+let heroTimer = null;
+
+function trocarHero() {
+  const foto   = document.getElementById('heroFoto');
+  const nome   = document.getElementById('heroNome');
+  const cargo  = document.getElementById('heroCargo');
+  const prox   = document.getElementById('heroProximoNome');
+
+  foto.classList.add('trocando');
+
+  setTimeout(() => {
+    heroAtual = (heroAtual + 1) % heroPersonagens.length;
+    const p = heroPersonagens[heroAtual];
+
+    foto.src = p.foto;
+    foto.alt = p.alt;
+    nome.textContent  = p.nome;
+    cargo.textContent = p.cargo;
+    prox.textContent  = p.proximo;
+
+    foto.classList.remove('trocando');
+  }, 500);
+
+  reiniciarHeroTimer();
+}
+
+function iniciarHeroTimer() {
+  heroTimer = setInterval(trocarHero, 5000);
+}
+
+function reiniciarHeroTimer() {
+  clearInterval(heroTimer);
+  iniciarHeroTimer();
+}
+
+iniciarHeroTimer();
+
+
+/* =========================================
    NAVEGAÇÃO ENTRE SEÇÕES
    ========================================= */
 function irPara(index) {
@@ -55,20 +114,18 @@ function irPara(index) {
   atual = index;
   secoes[atual].scrollIntoView({ behavior: 'smooth' });
   secoes[atual].classList.add('visible');
-  if (index === 1) {
-    mostrarScrollHint(secoes[1], 400);
-  }
+
   if (index === 2) {
     ativarStrokeFill();
-    ativarTimeline().then(() => mostrarScrollHint(secoes[2], 200));
+    ativarTimeline();
   }
   if (index === 3) {
     ativarServicosStrokeFill();
-    ativarServicos().then(() => mostrarScrollHint(secoes[3], 200));
+    ativarServicos();
   }
   if (index === 4) {
     ativarEscopoStrokeFill();
-    ativarEscopo().then(() => mostrarScrollHint(secoes[4], 200));
+    ativarEscopo();
     const btn = document.querySelector('.escopo-cta-btn');
     if (btn) {
       btn.style.transition = 'none';
@@ -80,23 +137,23 @@ function irPara(index) {
   }
   if (index === 5) {
     ativarDiferenciaisStrokeFill();
-    ativarDiferenciais().then(() => mostrarScrollHint(secoes[5], 200));
+    ativarDiferenciais();
   }
   if (index === 6) {
     ativarCasosStrokeFill();
-    ativarCasos().then(() => mostrarScrollHint(secoes[6], 200));
+    ativarCasos();
   }
   if (index === 7) {
     ativarParceriasStrokeFill();
-    ativarParcerias().then(() => mostrarScrollHint(secoes[7], 200));
+    ativarParcerias();
   }
   if (index === 8) {
     ativarDepoimentosStrokeFill();
-    ativarDepoimentos().then(() => mostrarScrollHint(secoes[8], 200));
+    ativarDepoimentos();
   }
-if (index === 9) {
-  ativarPacotesStrokeFill();
-}
+  if (index === 9) {
+    ativarPacotesStrokeFill();
+  }
 
   setTimeout(() => { travado = false; }, 900);
 }
