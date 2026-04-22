@@ -263,11 +263,13 @@ async function ativarTimeline() {
       const r1 = dot1.getBoundingClientRect();
       const r2 = dot2.getBoundingClientRect();
 
-      linha.style.left      = (r1.left + r1.width / 2 - wrapRect.left) + 'px';
+      const dotCenterX = r1.left + r1.width / 2 - wrapRect.left;
+      linha.style.left      = dotCenterX + 'px';
       linha.style.top       = (r1.bottom - wrapRect.top) + 'px';
       linha.style.height    = Math.max(0, r2.top - r1.bottom) + 'px';
-      linha.style.transform = 'translateX(-50%)';
-
+      linha.style.width     = '2px';
+      linha.style.transform = 'none';
+      linha.style.marginLeft = '-1px';
       inner.style.transformOrigin = 'top';
       inner.style.animation = 'tlLinhaCresce 480ms cubic-bezier(0.22,1,0.36,1) forwards';
       await esperar(480);
