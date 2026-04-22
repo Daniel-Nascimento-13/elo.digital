@@ -65,6 +65,7 @@ function trocarHero() {
 
     foto.src = p.foto;
     foto.alt = p.alt;
+    foto.style.objectPosition = p.objectPosition;
     nome.textContent  = p.nome;
     cargo.textContent = p.cargo;
     prox.textContent  = p.proximo;
@@ -126,7 +127,7 @@ function irPara(index) {
     ativarCasos();
   }
   if (index === 7) {
-  ativarParcerias();
+    ativarParcerias();
 }
   if (index === 8) {
     ativarDepoimentosStrokeFill();
@@ -197,7 +198,7 @@ setInterval(() => {
    ========================================= */
 /* STROKE FILL DO TÍTULO */
 function ativarStrokeFill() {
-  const els = document.querySelectorAll('.titulo-outline, .titulo-fill');
+  const els = document.querySelectorAll('.estrategia-titulo-outline, .estrategia-titulo-fill');
   els.forEach((el, i) => {
     el.style.animation = 'none';
     el.style.color = 'transparent';
@@ -538,7 +539,7 @@ async function ativarCasos() {
 
 
 /* =========================================
-    SEÇÃO 8 — CASES DE SUSCESSO (2)
+    SEÇÃO 8 — PARCERIAS PROFISSIONAIS
    ========================================= */
 let parceriasFez = false;
 let parcAtivo = 0;

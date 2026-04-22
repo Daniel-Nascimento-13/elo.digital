@@ -126,6 +126,14 @@ a { color: inherit; text-decoration: none; }
   vertical-align: middle;
 }
 
+.titulo-de {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.3);
+  -webkit-text-stroke: 0;
+}
+
 
 /* =========================================
    SEÇÃO 1 — APRESENTAÇÃO
@@ -177,15 +185,6 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: -45px;
   position: relative;
   z-index: 2;
-}
-.hero-foto {
-  width: 210px;
-  height: 240px;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-  filter: grayscale(15%);
-  align-self: flex-end;
 }
 .hero-nome-wrap {
   display: flex;
@@ -472,33 +471,6 @@ a { color: inherit; text-decoration: none; }
   margin-top: 12px;
   margin-bottom: 16px;
 }
-.titulo-outline {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(18px, 5vw, 28px);
-  font-weight: 800;
-  letter-spacing: -2px;
-  text-transform: uppercase;
-  color: transparent;
-  line-height: 0.9;
-  -webkit-text-stroke: 1px rgba(255,255,255,0.15);
-}
-.titulo-fill {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(28px, 8vw, 42px);
-  font-weight: 800;
-  letter-spacing: -2px;
-  text-transform: uppercase;
-  color: transparent;
-  line-height: 0.9;
-  -webkit-text-stroke: 1px rgba(255,255,255,0.15);
-}
-.titulo-de {
-  font-size: clamp(12px, 3vw, 18px);
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: rgba(255,255,255,0.3);
-  -webkit-text-stroke: 0;
-}
 
 /* ANIMAÇÃO STROKE FILL — DISPARADA VIA JS */
 @keyframes strokeFill {
@@ -601,6 +573,27 @@ a { color: inherit; text-decoration: none; }
   opacity: 0;
 }
 
+.estrategia-titulo-outline {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(10px, 3vw, 16px);
+  font-weight: 800;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  color: transparent;
+  line-height: 0.9;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.15);
+}
+.estrategia-titulo-fill {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(25px, 5vw, 39px);
+  font-weight: 800;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  color: transparent;
+  line-height: 0.9;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.15);
+}
+
 /* TIMELINE — ANIMAÇÕES */
 @keyframes tlLinhaCresce {
   from { transform: scaleY(0); }
@@ -649,7 +642,7 @@ a { color: inherit; text-decoration: none; }
 }
 .servicos-titulo-outline {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(18px, 5vw, 28px);
+  font-size: clamp(10px, 3vw, 16px);
   font-weight: 800;
   letter-spacing: -2px;
   text-transform: uppercase;
@@ -661,7 +654,7 @@ a { color: inherit; text-decoration: none; }
 }
 .servicos-titulo-fill {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(28px, 8vw, 42px);
+  font-size: clamp(25px, 5vw, 39px);
   font-weight: 800;
   letter-spacing: -2px;
   text-transform: uppercase;
@@ -823,7 +816,7 @@ a { color: inherit; text-decoration: none; }
 }
 .escopo-titulo-outline {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(18px, 5vw, 28px);
+  font-size: clamp(10px, 3vw, 16px);
   font-weight: 800;
   letter-spacing: -2px;
   text-transform: uppercase;
@@ -834,7 +827,7 @@ a { color: inherit; text-decoration: none; }
 }
 .escopo-titulo-fill {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(28px, 8vw, 42px);
+  font-size: clamp(25px, 5vw, 39px);
   font-weight: 800;
   letter-spacing: -2px;
   text-transform: uppercase;
@@ -1035,7 +1028,7 @@ a { color: inherit; text-decoration: none; }
 }
 .diferenciais-titulo-outline {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(18px, 5vw, 28px);
+  font-size: clamp(10px, 3vw, 16px);
   font-weight: 800;
   letter-spacing: -2px;
   text-transform: uppercase;
@@ -1046,7 +1039,7 @@ a { color: inherit; text-decoration: none; }
 }
 .diferenciais-titulo-fill {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(28px, 8vw, 42px);
+  font-size: clamp(25px, 5vw, 39px);
   font-weight: 800;
   letter-spacing: -2px;
   text-transform: uppercase;
@@ -1191,7 +1184,7 @@ a { color: inherit; text-decoration: none; }
 }
 .casos-titulo-outline {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(14px, 4vw, 20px);
+  font-size: clamp(10px, 3vw, 16px);
   font-weight: 800;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -1202,7 +1195,7 @@ a { color: inherit; text-decoration: none; }
 }
 .casos-titulo-fill {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(28px, 8vw, 42px);
+  font-size: clamp(25px, 5vw, 39px);
   font-weight: 800;
   letter-spacing: -2px;
   text-transform: uppercase;
@@ -1290,7 +1283,7 @@ a { color: inherit; text-decoration: none; }
 
 
 /* =========================================
-    SEÇÃO 8 — CASES DE SUSCESSO (2)
+    SEÇÃO 8 — PARCERIAS PROFISSIONAIS
    ========================================= */
 .parcerias {
   background: #000;
@@ -1497,7 +1490,7 @@ a { color: inherit; text-decoration: none; }
 }
 .dep-titulo-outline {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(18px, 5vw, 28px);
+  font-size: clamp(10px, 3vw, 16px);
   font-weight: 800;
   letter-spacing: -2px;
   text-transform: uppercase;
@@ -1506,7 +1499,7 @@ a { color: inherit; text-decoration: none; }
 }
 .dep-titulo-fill {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(28px, 8vw, 42px);
+  font-size: clamp(25px, 5vw, 39px);
   font-weight: 800;
   letter-spacing: -2px;
   text-transform: uppercase;
@@ -1634,7 +1627,7 @@ a { color: inherit; text-decoration: none; }
 
 
 /* =========================================
-   SEÇÃO 10 — CASES DE SUSCESSO (3)
+   SEÇÃO 10 — CLIENTES EM DESTAQUE
    ========================================= */
 .cases {
   background: #000;
@@ -1665,7 +1658,7 @@ a { color: inherit; text-decoration: none; }
 }
 .cases-titulo-outline {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(18px, 5vw, 28px);
+  font-size: clamp(10px, 3vw, 16px);
   font-weight: 800;
   letter-spacing: -2px;
   text-transform: uppercase;
@@ -1674,7 +1667,7 @@ a { color: inherit; text-decoration: none; }
 }
 .cases-titulo-fill {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(28px, 8vw, 42px);
+  font-size: clamp(25px, 5vw, 39px);
   font-weight: 800;
   letter-spacing: -2px;
   text-transform: uppercase;
