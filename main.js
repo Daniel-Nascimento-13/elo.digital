@@ -48,6 +48,12 @@ const heroPersonagens = [
   }
 ];
 
+// PRÉ-CARREGA AS FOTOS DO HERO
+heroPersonagens.forEach(p => {
+  const img = new Image();
+  img.src = p.foto;
+});
+
 let heroAtual = 0;
 let heroTimer = null;
 
@@ -141,6 +147,9 @@ if (index === 9) {
     void el.offsetWidth;
     el.style.animation = `casesStrokeFill 1.2s ease ${0.3 + i * 0.2}s forwards`;
   });
+}
+if (index === 10) {
+  ativarCtaFinal();
 }
 
   setTimeout(() => { travado = false; }, 900);
@@ -663,3 +672,29 @@ async function ativarDepoimentos() {
   });
 }
 
+
+/* =========================================
+   SEÇÃO 11 — CTA FINAL
+   ========================================= */
+let ctaFinalFez = false;
+
+function ativarCtaFinal() {
+  if (ctaFinalFez) return;
+  ctaFinalFez = true;
+
+  const inner = document.getElementById('ctaTagsInner');
+  if (!inner) return;
+
+  let pos = 0;
+  let largura = 0;
+
+  function animarTags() {
+    if (largura === 0) largura = inner.scrollWidth / 2;
+    pos -= 0.6;
+    if (Math.abs(pos) >= largura) pos = 0;
+    inner.style.transform = `translateX(${pos}px)`;
+    requestAnimationFrame(animarTags);
+  }
+
+  requestAnimationFrame(animarTags);
+}
