@@ -1388,7 +1388,7 @@ a { color: inherit; text-decoration: none; }
 }
 .parc-nome {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(18px, 5.5vw, 32px);
+  font-size: clamp(14px, 4vw, 22px);
   font-weight: 800;
   color: #fff;
   text-transform: uppercase;
@@ -1716,15 +1716,15 @@ a { color: inherit; text-decoration: none; }
 /* CARD */
 .case-card {
   flex-shrink: 0;
-  width: 160px;
+  width: 200px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
 .case-img {
-  width: 160px;
-  height: 200px;
+  width: 200px;
+  height: 260px;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.08);
