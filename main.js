@@ -23,26 +23,6 @@ setTimeout(() => {
     intro.style.display = 'none';
     travado = false;
   }, { once: true });
-
-  const hint = secoes[0].querySelector('.scroll-hint');
-  const span = hint?.querySelector('span');
-  const barra = hint?.querySelector('.scroll-hint-barra');
-  if (hint && span) {
-    span.style.animation = 'none';
-    hint.style.opacity = '0';
-    hint.style.transition = 'opacity 0.6s ease';
-    if (barra) barra.style.opacity = '0';
-    setTimeout(() => {
-      hint.style.opacity = '1';
-      span.style.animation = 'digitando 4s steps(38) 0.3s forwards';
-    }, 2500);
-    setTimeout(() => {
-      if (barra) {
-        barra.style.transition = 'opacity 0.6s ease';
-        barra.style.opacity = '1';
-      }
-    }, 7000);
-  }
 }, 2000);
 
 
@@ -146,16 +126,21 @@ function irPara(index) {
     ativarCasos();
   }
   if (index === 7) {
-    ativarParceriasStrokeFill();
-    ativarParcerias();
-  }
+  ativarParcerias();
+}
   if (index === 8) {
     ativarDepoimentosStrokeFill();
     ativarDepoimentos();
   }
-  if (index === 9) {
-    ativarPacotesStrokeFill();
-  }
+if (index === 9) {
+  const els = document.querySelectorAll('.cases-titulo-outline, .cases-titulo-fill');
+  els.forEach((el, i) => {
+    el.style.animation = 'none';
+    el.style.color = 'transparent';
+    void el.offsetWidth;
+    el.style.animation = `casesStrokeFill 1.2s ease ${0.3 + i * 0.2}s forwards`;
+  });
+}
 
   setTimeout(() => { travado = false; }, 900);
 }
@@ -164,16 +149,23 @@ function irPara(index) {
 /* =========================================
    CONTROLE — TOUCH (MOBILE)
    ========================================= */
+let toqueX = 0;
 let toqueY = 0;
 
 document.addEventListener('touchstart', e => {
+  toqueX = e.touches[0].clientX;
   toqueY = e.touches[0].clientY;
 }, { passive: true });
 
 document.addEventListener('touchend', e => {
-  const diff = toqueY - e.changedTouches[0].clientY;
-  if (Math.abs(diff) < 50) return;
-  diff > 0 ? irPara(atual + 1) : irPara(atual - 1);
+  const diffX = toqueX - e.changedTouches[0].clientX;
+  const diffY = toqueY - e.changedTouches[0].clientY;
+
+  // SE O MOVIMENTO FOR MAIS HORIZONTAL DO QUE VERTICAL, IGNORA
+  if (Math.abs(diffX) > Math.abs(diffY)) return;
+
+  if (Math.abs(diffY) < 50) return;
+  diffY > 0 ? irPara(atual + 1) : irPara(atual - 1);
 }, { passive: true });
 
 
@@ -185,18 +177,6 @@ document.addEventListener('wheel', e => {
   if (Math.abs(e.deltaY) < 30) return;
   e.deltaY > 0 ? irPara(atual + 1) : irPara(atual - 1);
 }, { passive: false });
-
-
-/* =========================================
-   SCROLL HINT — APARECE APÓS ANIMAÇÕES
-   ========================================= */
-function mostrarScrollHint(secao, delay) {
-  const hint = secao.querySelector('.scroll-hint');
-  if (!hint) return;
-  hint.style.opacity = '0';
-  hint.style.transition = 'opacity 0.6s ease';
-  setTimeout(() => { hint.style.opacity = '1'; }, delay);
-}
 
 
 /* =========================================
@@ -558,24 +538,13 @@ async function ativarCasos() {
 
 
 /* =========================================
-   SEÇÃO 8 — PARCERIAS COM MARCAS / PROFISSIONAIS
+    SEÇÃO 8 — CASES DE SUSCESSO (2)
    ========================================= */
 let parceriasFez = false;
 let parcAtivo = 0;
 let parcAutoTimer = null;
-let parcCarroIdx = 0;
-let parcCarroTimer = null;
 const PARC_INTERVALO = 4500;
 const PARC_TOTAL = 2;
-
-function ativarParceriasStrokeFill() {
-  const el = document.querySelector('.parcerias-titulo-outline');
-  if (!el) return;
-  el.style.animation = 'none';
-  el.style.color = 'transparent';
-  void el.offsetWidth;
-  el.style.animation = `parceriasStrokeFill 1.2s ease 0.3s forwards`;
-}
 
 /* MONTA AS LETRAS NO STAGGER */
 function montarLetrasParceria(slide) {
@@ -649,26 +618,6 @@ function reiniciarAutoplayParcerias() {
   iniciarAutoplayParcerias();
 }
 
-/* CARROSSEL DO TÍTULO — MARCAS / PROFISSIONAIS */
-function rodarCarrosselParcerias() {
-  const itens = document.querySelectorAll('.parcerias-carrossel-item');
-  if (itens.length < 2) return;
-
-  parcCarroTimer = setInterval(() => {
-    const atual = itens[parcCarroIdx];
-    atual.classList.remove('ativo');
-    atual.classList.add('saindo');
-
-    parcCarroIdx = (parcCarroIdx + 1) % itens.length;
-    const proximo = itens[parcCarroIdx];
-
-    proximo.classList.remove('saindo');
-    proximo.classList.add('ativo');
-
-    setTimeout(() => atual.classList.remove('saindo'), 600);
-  }, 2800);
-}
-
 async function ativarParcerias() {
   if (parceriasFez) return;
   parceriasFez = true;
@@ -680,13 +629,7 @@ async function ativarParcerias() {
   });
 
   await esperar(600);
-
-  /* DISPARA STAGGER NO PRIMEIRO */
   montarLetrasParceria(slides[0]);
-
-  /* COMEÇA CARROSSEL DO TÍTULO E AUTO-PLAY DOS SLIDES */
-  await esperar(2200);
-  rodarCarrosselParcerias();
   iniciarAutoplayParcerias();
 }
 
@@ -717,44 +660,3 @@ async function ativarDepoimentos() {
   });
 }
 
-
-/* =========================================
-   SEÇÃO 10 — PACOTES
-   ========================================= */
-let pacAtivo = 0;
-
-function ativarPacotesStrokeFill() {
-  const els = document.querySelectorAll('.pac-titulo-outline, .pac-titulo-fill');
-  els.forEach((el, i) => {
-    el.style.animation = 'none';
-    el.style.color = 'transparent';
-    void el.offsetWidth;
-    el.style.animation = `pacStrokeFill 1.2s ease ${0.3 + i * 0.2}s forwards`;
-  });
-}
-
-function irParaPacote(idx) {
-  if (idx === pacAtivo) return;
-  document.getElementById('pac' + pacAtivo).classList.remove('ativo');
-  document.getElementById('pac' + idx).classList.add('ativo');
-  document.getElementById('pac' + idx).parentElement.scrollTop = 0;
-  document.querySelectorAll('.pac-toggle-btn').forEach((b, i) => {
-    b.classList.toggle('ativo', i === idx);
-  });
-  pacAtivo = idx;
-}
-
-/* CARD FLUTUANTE — WHATS */
-(function () {
-  const inner = document.getElementById('pacFloatInner');
-  if (!inner) return;
-
-  let virado = false;
-
-  function virar() {
-    virado = !virado;
-    inner.classList.toggle('virado', virado);
-  }
-
-  setInterval(virar, 5000);
-})();
