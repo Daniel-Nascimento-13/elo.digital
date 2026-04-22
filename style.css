@@ -1860,6 +1860,7 @@ a { color: inherit; text-decoration: none; }
   align-items: flex-end;
   justify-content: center;
   min-height: 0;
+  max-height: 45svh;
   margin: 0 -20px;
 }
 
@@ -1890,6 +1891,7 @@ a { color: inherit; text-decoration: none; }
 .cta-final-rodape {
   flex-shrink: 0;
   padding-top: 16px;
+   margin-top: 5px;
 }
 .cta-final-btn {
   display: flex;
