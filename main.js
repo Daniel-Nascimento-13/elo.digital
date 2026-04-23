@@ -6,8 +6,6 @@ const intro    = document.getElementById('intro');
 const secoes   = Array.from(document.querySelectorAll('section'));
 let atual      = 0;
 let travado    = true;
-let timelineFez  = false;
-let servicosFez  = false;
 
 
 /* =========================================
@@ -78,8 +76,6 @@ function trocarHero() {
 
     foto.classList.remove('trocando');
   }, 500);
-
-  reiniciarHeroTimer();
 }
 
 function iniciarHeroTimer() {
@@ -134,23 +130,17 @@ function irPara(index) {
   }
   if (index === 7) {
     ativarParcerias();
-}
+  }
   if (index === 8) {
     ativarDepoimentosStrokeFill();
     ativarDepoimentos();
   }
-if (index === 9) {
-  const els = document.querySelectorAll('.cases-titulo-outline, .cases-titulo-fill');
-  els.forEach((el, i) => {
-    el.style.animation = 'none';
-    el.style.color = 'transparent';
-    void el.offsetWidth;
-    el.style.animation = `casesStrokeFill 1.2s ease ${0.3 + i * 0.2}s forwards`;
-  });
-}
-if (index === 10) {
-  ativarCtaFinal();
-}
+  if (index === 9) {
+    ativarCasesStrokeFill();
+  }
+  if (index === 10) {
+    ativarCtaFinal();
+  }
 
   setTimeout(() => { travado = false; }, 900);
 }
@@ -218,6 +208,8 @@ function ativarStrokeFill() {
 
 /* TIMELINE */
 const esperar = ms => new Promise(r => setTimeout(r, ms));
+
+let timelineFez = false;
 
 function animarDot(id) {
   const el = document.getElementById(id);
@@ -337,6 +329,8 @@ function toggleServico(i) {
   }
 }
 
+let servicosFez = false;
+
 async function ativarServicos() {
   if (servicosFez) return;
   servicosFez = true;
@@ -362,7 +356,7 @@ async function ativarServicos() {
    SEÇÃO 5 — ESCOPO E ENTREGAS
    ========================================= */
 let escopoFez = false;
-
+ 
 function ativarEscopoStrokeFill() {
   const els = document.querySelectorAll('.escopo-titulo-outline, .escopo-titulo-fill');
   els.forEach((el, i) => {
@@ -372,9 +366,9 @@ function ativarEscopoStrokeFill() {
     el.style.animation = `escopoStrokeFill 1.2s ease ${0.3 + i * 0.2}s forwards`;
   });
 }
-
+ 
 async function ativarEscopo() {
-  if (escopoFez) return escopoFez;
+  if (escopoFez) return;
   escopoFez = true;
   for (let i = 0; i < 4; i++) {
     const card = document.getElementById('ec' + i);
@@ -387,14 +381,14 @@ async function ativarEscopo() {
     await esperar(150);
   }
 }
-
+ 
 const ctaBtn = document.querySelector('.escopo-cta-btn');
 const whatsUrl = ctaBtn?.getAttribute('data-href');
-
+ 
 ctaBtn?.addEventListener('click', function(e) {
   e.preventDefault();
   ctaBtn.style.animation = 'none';
-
+ 
   const rect = ctaBtn.getBoundingClientRect();
   const trail = document.createElement('div');
   trail.style.cssText = `
@@ -410,21 +404,58 @@ ctaBtn?.addEventListener('click', function(e) {
     transition: transform 0.5s cubic-bezier(0.55, 0, 1, 0.45), opacity 0.6s ease 0.3s;
   `;
   document.body.appendChild(trail);
-
+ 
   ctaBtn.style.transition = 'transform 0.5s cubic-bezier(0.55, 0, 1, 0.45)';
   ctaBtn.style.transform = 'translateX(120vw)';
-
+ 
   requestAnimationFrame(() => {
     trail.style.transform = 'translateX(120vw)';
     trail.style.opacity = '0';
   });
-
+ 
   setTimeout(() => {
     trail.remove();
     window.open(whatsUrl, '_blank');
   }, 900);
 });
-
+ 
+const ctaFinalBtn = document.querySelector('.cta-final-btn');
+const whatsUrlFinal = ctaFinalBtn?.getAttribute('href');
+ 
+ctaFinalBtn?.addEventListener('click', function(e) {
+  e.preventDefault();
+  ctaFinalBtn.style.animation = 'none';
+ 
+  const rect = ctaFinalBtn.getBoundingClientRect();
+  const trail = document.createElement('div');
+  trail.style.cssText = `
+    position: fixed;
+    left: ${rect.left}px;
+    top: ${rect.top}px;
+    width: ${rect.width}px;
+    height: ${rect.height}px;
+    background: linear-gradient(to right, #1EE07F33, #1EE07F88, transparent);
+    pointer-events: none;
+    border-radius: 2px;
+    z-index: 999;
+    transition: transform 0.5s cubic-bezier(0.55, 0, 1, 0.45), opacity 0.6s ease 0.3s;
+  `;
+  document.body.appendChild(trail);
+ 
+  ctaFinalBtn.style.transition = 'transform 0.5s cubic-bezier(0.55, 0, 1, 0.45)';
+  ctaFinalBtn.style.transform = 'translateX(120vw)';
+ 
+  requestAnimationFrame(() => {
+    trail.style.transform = 'translateX(120vw)';
+    trail.style.opacity = '0';
+  });
+ 
+  setTimeout(() => {
+    trail.remove();
+    window.open(whatsUrlFinal, '_blank');
+  }, 900);
+});
+ 
 // RESET AO VOLTAR DA ABA
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible') {
@@ -433,6 +464,12 @@ document.addEventListener('visibilitychange', () => {
       btn.style.transition = 'none';
       btn.style.transform = 'translateX(0)';
       btn.style.animation = 'ctaShake 4s ease-in-out infinite';
+    }
+    const btnFinal = document.querySelector('.cta-final-btn');
+    if (btnFinal) {
+      btnFinal.style.transition = 'none';
+      btnFinal.style.transform = 'translateX(0)';
+      btnFinal.style.animation = 'ctaShake 4s ease-in-out infinite';
     }
     secoes[atual].scrollIntoView({ behavior: 'instant' });
   }
@@ -502,7 +539,7 @@ function ativarCasosStrokeFill() {
     el.style.animation = 'none';
     el.style.color = 'transparent';
     void el.offsetWidth;
-    el.style.animation = `casosStrokeFill 1.2s ease ${0.3 + i * 0.2}s forwards`;
+    el.style.animation = `casesStrokeFill 1.2s ease ${0.3 + i * 0.2}s forwards`;
   });
 }
 
@@ -669,6 +706,25 @@ async function ativarDepoimentos() {
     const inner = faixa.querySelector('.dep-faixa-inner');
     inner.innerHTML += inner.innerHTML;
     inner.classList.add(`dep-${faixa.dataset.direcao}`);
+  });
+}
+
+
+/* =========================================
+   SEÇÃO 10 — CLIENTES EM DESTAQUE
+   ========================================= */
+let casesFez = false;
+
+function ativarCasesStrokeFill() {
+  if (casesFez) return;
+  casesFez = true;
+
+  const els = document.querySelectorAll('.cases-titulo-outline, .cases-titulo-fill');
+  els.forEach((el, i) => {
+    el.style.animation = 'none';
+    el.style.color = 'transparent';
+    void el.offsetWidth;
+    el.style.animation = `casesStrokeFill 1.2s ease ${0.3 + i * 0.2}s forwards`;
   });
 }
 

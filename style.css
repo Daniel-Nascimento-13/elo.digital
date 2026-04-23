@@ -259,20 +259,12 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* FRASE */
-.frase {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: clamp(26px, 7.5vw, 36px);
-  font-weight: 400;
-  color: #fff;
-  line-height: 1.25;
-  border: none;
-  padding: 0;
-  margin-top: 40px;
-  margin-bottom: 32px;
+.frase,
+.sobre-frase {
   position: relative;
 }
-.frase::before {
+.frase::before,
+.sobre-frase::before {
   content: '"';
   font-size: 80px;
   color: var(--green);
@@ -286,6 +278,19 @@ a { color: inherit; text-decoration: none; }
 @keyframes balancaAspas {
   0%, 100% { transform: rotate(-3deg) translateY(0); }
   50%       { transform: rotate(3deg) translateY(-4px); }
+}
+
+.frase {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(26px, 7.5vw, 36px);
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.25;
+  border: none;
+  padding: 0;
+  margin-top: 40px;
+  margin-bottom: 32px;
 }
 
 /* DESCRIÇÃO */
@@ -379,19 +384,7 @@ a { color: inherit; text-decoration: none; }
   max-width: 340px;
   border: none;
   padding: 0;
-  position: relative;
   margin-top: 80px;
-}
-.sobre-frase::before {
-  content: '"';
-  font-size: 80px;
-  color: var(--green);
-  opacity: 0.6;
-  position: absolute;
-  top: -28px; left: -8px;
-  line-height: 1;
-  font-family: 'Cormorant Garamond', serif;
-  animation: balancaAspas 2s ease-in-out infinite;
 }
 .sobre-frase em { font-style: italic; color: var(--green); }
 
@@ -656,8 +649,6 @@ a { color: inherit; text-decoration: none; }
   color: transparent;
   line-height: 0.9;
   -webkit-text-stroke: 0.5px rgba(255,255,255,0.15);
-  opacity: 0;
-  transition: opacity 0.5s ease 0.3s;
 }
 .servicos-titulo-fill {
   font-family: 'Syne', sans-serif;
@@ -668,11 +659,7 @@ a { color: inherit; text-decoration: none; }
   color: transparent;
   line-height: 0.9;
   -webkit-text-stroke: 1px rgba(255,255,255,0.15);
-  opacity: 0;
-  transition: opacity 0.5s ease 0.5s;
 }
-.servicos.visible .servicos-titulo-outline,
-.servicos.visible .servicos-titulo-fill { opacity: 1; }
 
 /* ANIMAÇÃO STROKE FILL — DISPARADA VIA JS */
 @keyframes servicosStrokeFill {
@@ -829,8 +816,6 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
   color: transparent;
   -webkit-text-stroke: 0.5px rgba(255,255,255,0.15);
-  opacity: 0;
-  transition: opacity 0.5s ease 0.3s;
 }
 .escopo-titulo-fill {
   font-family: 'Syne', sans-serif;
@@ -840,11 +825,7 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
   color: transparent;
   -webkit-text-stroke: 1px rgba(255,255,255,0.15);
-  opacity: 0;
-  transition: opacity 0.5s ease 0.5s;
 }
-.escopo.visible .escopo-titulo-outline,
-.escopo.visible .escopo-titulo-fill { opacity: 1; }
 
 @keyframes escopoStrokeFill {
   0%   { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.15); }
@@ -1042,8 +1023,6 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
   color: transparent;
   -webkit-text-stroke: 0.5px rgba(255,255,255,0.15);
-  opacity: 0;
-  transition: opacity 0.5s ease 0.3s;
 }
 .diferenciais-titulo-fill {
   font-family: 'Syne', sans-serif;
@@ -1053,11 +1032,7 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
   color: transparent;
   -webkit-text-stroke: 1px rgba(255,255,255,0.15);
-  opacity: 0;
-  transition: opacity 0.5s ease 0.5s;
 }
-.diferenciais.visible .diferenciais-titulo-outline,
-.diferenciais.visible .diferenciais-titulo-fill { opacity: 1; }
 
 @keyframes diferenciaisStrokeFill {
   0%   { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.15); }
@@ -1198,8 +1173,6 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
   color: transparent;
   -webkit-text-stroke: 0.5px rgba(255,255,255,0.15);
-  opacity: 0;
-  transition: opacity 0.5s ease 0.3s;
 }
 .casos-titulo-fill {
   font-family: 'Syne', sans-serif;
@@ -1209,15 +1182,6 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
   color: transparent;
   -webkit-text-stroke: 1px rgba(255,255,255,0.15);
-  opacity: 0;
-  transition: opacity 0.5s ease 0.5s;
-}
-.casos.visible .casos-titulo-outline,
-.casos.visible .casos-titulo-fill { opacity: 1; }
-
-@keyframes casosStrokeFill {
-  0%   { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.15); }
-  100% { color: #fff;        -webkit-text-stroke: 1px #fff; }
 }
 
 /* GRID */
@@ -1626,9 +1590,9 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 1px;
   text-transform: uppercase;
 }
-/* DEIXA OS NOMES E EMPRESAS INVISIVEL NO CARD */
+
 .dep-autor-nome,
-.dep-autor-empresa, 
+.dep-autor-empresa,
 .dep-avatar {
   display: none;
 }
@@ -1682,6 +1646,8 @@ a { color: inherit; text-decoration: none; }
   color: transparent;
   -webkit-text-stroke: 1px rgba(255,255,255,0.15);
 }
+
+/* KEYFRAME UNIFICADO: USADO POR SEÇÃO 7 E SEÇÃO 10 */
 @keyframes casesStrokeFill {
   0%   { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.15); }
   100% { color: #fff;        -webkit-text-stroke: 1px #fff; }
@@ -1890,7 +1856,7 @@ a { color: inherit; text-decoration: none; }
 .cta-final-rodape {
   flex-shrink: 0;
   padding-top: 16px;
-   margin-top: 5px;
+  margin-top: 5px;
 }
 .cta-final-btn {
   display: flex;
